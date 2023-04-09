@@ -54,8 +54,8 @@ function divide(num1=1,num2=0){
 }
 
 
-let num1 = '';
-let num2 = '';
+let num1 = 0;
+let num2 = 0;
 let opCount = 0;
 let oper = '';
 
@@ -64,18 +64,18 @@ let oper = '';
 
 num.forEach( n =>{
     n.onclick = (e) =>{
-        updateLabels(e);
+        updateLabels(e.target.value);
     }
 });
 
-function updateLabels(e){
+function updateLabels(val){
     if(opCount == 0){
-        num1 += e.target.value;
-        currentLbl.innerText = num1;
+        num1 += val;
+        currentLbl.innerText = parseInt(num1);
     }
     else if(opCount >= 1){
-        num2 += e.target.value;
-        currentLbl.innerText = num2;
+        num2 += val;
+        currentLbl.innerText = parseInt(num2);
     }
 }
 
@@ -86,7 +86,7 @@ opBtn.forEach( op =>{
 
         if(opCount == 1){
             oper = e.target.value;
-            historyLbl.innerText = num1 + oper + num2;
+            historyLbl.innerText = parseInt(num1) + oper;
         }
 
         else if(opCount>1){
@@ -95,7 +95,7 @@ opBtn.forEach( op =>{
                 
             if(e.target.value == '=')
             {                
-                historyLbl.innerText = num1 + oper + num2 + e.target.value;
+                historyLbl.innerText = parseInt(num1) + oper + parseInt(num2) + e.target.value;
                 currentLbl.innerText = operate(num1,num2,oper);
                 num1 = '';
                 num2 = '';
@@ -119,8 +119,8 @@ clearBtn.onclick = (e) => {
 }
 
 function reset(){
-    num1 = '';
-    num2 = '';
+    num1 = 0;
+    num2 = 0;
     opCount = 0;
     oper = '';
     historyLbl.innerText = '';
@@ -133,6 +133,12 @@ deleteBtn.onclick = (e) => {
     if(curr && Number(curr) > 0){
         curr = curr.slice(0,-1);
         currentLbl.innerText = curr;
+        if(opCount == 0){
+            num1 = curr;
+        }
+        else if(opCount >= 1){
+            num2 = curr;
+        }
     }
     else{
         currentLbl.innerText = 0;
