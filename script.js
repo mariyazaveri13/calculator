@@ -1,3 +1,6 @@
+const btns = document.querySelectorAll('.btn');
+const current = document.getElementById('current');
+
 function operate(num1,num2,operator){
     switch (operator){
         case '+':
@@ -33,3 +36,11 @@ function multiply(num1,num2){
 function divide(num1,num2){
     result = num1 / num2;
 }
+
+let curr = '';
+btns.forEach(btn => {
+    btn.onclick = (e) => {
+        curr += e.target.value;
+        current.innerText = curr;
+    }
+});
