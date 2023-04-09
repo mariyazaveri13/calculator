@@ -57,6 +57,9 @@ let num2 = '';
 let opCount = 0;
 let oper = '';
 
+//When opcount is 0 there is obviosly no equation performed hence we keep on appending value to num1 and the current lable
+//when opcount is 1 that means we need to take in num 2 
+
 num.forEach( n =>{
     n.onclick = (e) =>{
 
@@ -65,7 +68,7 @@ num.forEach( n =>{
             currentLbl.innerText = num1;
         }
 
-        else if(opCount == 1){
+        else if(opCount >= 1){
             num2 += e.target.value;
             currentLbl.innerText = num2;
         }
@@ -87,50 +90,19 @@ opBtn.forEach( op =>{
             {
                 historyLbl.innerText = num1 + oper + num2 + e.target.value;
                 currentLbl.innerText = operate(num1,num2,oper);
+                num1 = '';
+                num2 = '';
+                opCount = 0;
+                oper = '';
             }
-            // historyLbl.innerText = num1 + oper + num2;
+            else
+            {
+                num1 = operate(num1,num2,oper);
+                oper = e.target.value;
+                historyLbl.innerText = num1 + oper;
+                currentLbl.innerText = '';
+                num2 = '';
+            }
         }
     }
 });
-
-// let isNum1Filled = false;
-// let isNum2Filled = false;
-
-// let isOpFilled = false;
-// let op = '';
-
-// btns.forEach(btn => {
-//     btn.onclick = (e) => {
-//         if(btn.classList.contains('num') && !isNum1Filled)
-//             num1 += e.target.value;
-//         else if(btn.classList.contains('num') && isNum1Filled)
-//             num2 += e.target.value;
-//         else if(btn.classList.contains('op'))
-//             op = e.target.value
-        
-//         if(!isNum1Filled)
-//             current.innerText = num1;
-
-//         if(op && !isOpFilled){
-//             isOpFilled = true;
-//             isNum1Filled = true;
-//             current.innerText = num2;
-//             operator.innerText =  op;
-//             history.innerText = num1;
-//             opCount++;
-//         }0
-//         if(opCount == 2)
-//             isNum2Filled = true;
-//         if(isNum1Filled && isNum2Filled)
-//         {
-//             current.innerText = operate(num1,num2,op);
-//         }else if(isOpFilled){
-//             current.innerText = num2;
-//             isNum1Filled = true;
-//         }
-
-//         // if(current.innerText == null)
-//         //     current.innerText = 0;
-
-//     }
-// });
