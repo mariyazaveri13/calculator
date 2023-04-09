@@ -34,22 +34,20 @@ function operate(num1,num2,operator){
 }
 
 function add(num1=0,num2=0){
-    console.log(num1 + num2);
     return num1 + num2;
 }
 
 function subs(num1=0, num2=0){
-    console.log(num1 - num2);
     return num1 - num2;
 }
 
 function multiply(num1=0,num2=1){
-    console.log(num1 * num2);
     return num1 * num2;
 }
 
-function divide(num1=1,num2=0){
-    console.log(num1 / num2);
+function divide(num1=0,num2=0){
+    if(num2 == 0 || num1 ==0)
+        return 0;
     return num1 / num2;
 }
 
@@ -71,11 +69,11 @@ num.forEach( n =>{
 function updateLabels(val){
     if(opCount == 0){
         num1 += val;
-        currentLbl.innerText = parseInt(num1);
+        currentLbl.innerText = Number(num1);
     }
     else if(opCount >= 1){
         num2 += val;
-        currentLbl.innerText = parseInt(num2);
+        currentLbl.innerText = Number(num2);
     }
 }
 
@@ -85,8 +83,10 @@ opBtn.forEach( op =>{
         opCount++;
 
         if(opCount == 1){
+            if(!num1)
+                return;
             oper = e.target.value;
-            historyLbl.innerText = parseInt(num1) + oper;
+            historyLbl.innerText = Number(num1) + oper;
         }
 
         else if(opCount>1){
@@ -95,7 +95,7 @@ opBtn.forEach( op =>{
                 
             if(e.target.value == '=')
             {                
-                historyLbl.innerText = parseInt(num1) + oper + parseInt(num2) + e.target.value;
+                historyLbl.innerText = Number(num1) + oper + Number(num2) + e.target.value;
                 currentLbl.innerText = operate(num1,num2,oper);
                 num1 = '';
                 num2 = '';
@@ -149,8 +149,8 @@ deleteBtn.onclick = (e) => {
 TODO
 
 1. extra decimal points not allowed
-2. if there is no value in num1 or num2 it shouldn't go to operate function.
+2. if there is no value in num1 or num2 it shouldn't go to operate function. - done
 3. if after equal someone types in other num or something it should operate
-4. clear and delete btn
+4. clear and delete btn - done
 
 */
