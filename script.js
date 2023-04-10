@@ -150,9 +150,10 @@ function reset(){
 
 deleteBtn.onclick = (e) => {
     let curr = currentLbl.innerText;
-    
+
     if(curr && Number(curr) > 0){
         curr = curr.slice(0,-1);
+        curr.toString().length == 0 ? curr = 0 : curr;
         currentLbl.innerText = curr;
         if(opCount == 0){
             num1 = curr;
@@ -165,14 +166,3 @@ deleteBtn.onclick = (e) => {
         currentLbl.innerText = 0;
     }
 }
-
-/*
-TODO
-
-1. extra decimal points not allowed - done
-2. if there is no value in num1 or num2 it shouldn't go to operate function. - done
-3. if after equal someone types in other num or something it should operate - done
-4. clear and delete btn - done
-5. if 0 is present in current lbl or in that case any num is present then let it operate - done
-
-*/

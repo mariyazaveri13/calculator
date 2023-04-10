@@ -9,18 +9,21 @@ body{
     background: #A5D7E8;
     display: flex;
     justify-content: center;
+    align-items: center;
     font-family: 'Share Tech Mono', monospace;
     color: #0B2447;
+    flex-direction: column;
 }
 
 .calculator{
     width: 400px;
     border: 3px solid #0B2447;
-    margin: 10vh;
+    margin: 3vh 0vh;
     border-radius: 8px;
     box-sizing: border-box;
     padding: 20px;
     background: #576CBC;
+    flex-basis: 350px;
 }
 
 .screen{
@@ -64,7 +67,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap:1em;
+    gap:.5em;
 }
 
 .btn:hover{
@@ -88,4 +91,17 @@ body{
 .clear:hover{
     background-color: #19376D;
     color: white;
+}
+
+footer{
+    text-align: center;
+}
+
+a{
+    color: #0B2447;
+    cursor: pointer;
+}
+
+a:visited{
+    color: #0B2447;
 }
