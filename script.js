@@ -62,19 +62,37 @@ let oper = '';
 
 num.forEach( n =>{
     n.onclick = (e) =>{
-        updateLabels(e.target.value);
+        updateLabels(e.target.value,e);
     }
 });
 
-function updateLabels(val){
+function updateLabels(val,e){
     if(opCount == 0){
         num1 += val;
-        currentLbl.innerText = Number(num1);
+        if(!isNumberKey(num1,e))
+        {
+            num1 = currentLbl.innerText;
+            return;
+        }
+        currentLbl.innerText = (num1 * 1).toString();
     }
     else if(opCount >= 1){
         num2 += val;
-        currentLbl.innerText = Number(num2);
+        if(!isNumberKey(num2,e)){
+            num2 = currentLbl.innerText;
+            return;    
+        }
+        currentLbl.innerText = (num2 * 1).toString();
+        
     }
+}
+
+function isNumberKey(txt) {
+    console.log((txt.match(new RegExp(/\./g)) || []).length); 
+    let numofdot = (txt.match(new RegExp(/\./g)) || []).length;
+    if(numofdot > 1)
+        return false;
+    return true;
 }
 
 opBtn.forEach( op =>{
@@ -83,8 +101,11 @@ opBtn.forEach( op =>{
         opCount++;
 
         if(opCount == 1){
-            if(!num1)
+            historyLbl.innerText = '';
+            currentLbl.innerText = 0;
+            if(num1 != 0 && !num1){
                 return;
+            }
             oper = e.target.value;
             historyLbl.innerText = Number(num1) + oper;
         }
@@ -97,7 +118,7 @@ opBtn.forEach( op =>{
             {                
                 historyLbl.innerText = Number(num1) + oper + Number(num2) + e.target.value;
                 currentLbl.innerText = operate(num1,num2,oper);
-                num1 = '';
+                num1 = currentLbl.innerText;
                 num2 = '';
                 opCount = 0;
                 oper = '';
@@ -148,9 +169,10 @@ deleteBtn.onclick = (e) => {
 /*
 TODO
 
-1. extra decimal points not allowed
+1. extra decimal points not allowed - done
 2. if there is no value in num1 or num2 it shouldn't go to operate function. - done
-3. if after equal someone types in other num or something it should operate
+3. if after equal someone types in other num or something it should operate - done
 4. clear and delete btn - done
+5. if 0 is present in current lbl or in that case any num is present then let it operate - done
 
 */
